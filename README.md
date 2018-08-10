@@ -1,4 +1,4 @@
-FYI I have zero experience with all of the technologies mentioned in the technical challenge as I am from a Windows background. I have tried to learn as much as I can to attempt this challenge. 
+FYI I have zero experience with all of the technologies mentioned in the technical challenge as I am from a Windows background. Nevertheless, I have tried to learn as much as I can to attempt this challenge. 
 
 
 # Requirements - OctopusLabs technical challenge
