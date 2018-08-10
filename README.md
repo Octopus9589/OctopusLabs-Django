@@ -100,5 +100,13 @@ k8s secrets are used to store the secrets:
 ## 5. Create Jenkins configuration to build and upload images to a chosen registry, as well as deploy the application to Kubernetes (master branch only).
 NA
 
-## 6. Store the code in a Github repository. Bonus points 1. Demonstrate usage of Helm Charts. 2. Demonstrate usage of Prometheus.
+## 6. Store the code in a Github repository. 
+https://github.com/Octopus9589/OctopusLabs-Django/
+
+### Bonus points 
+### 1. Demonstrate usage of Helm Charts. 
+https://github.com/Octopus9589/OctopusLabs-Django/tree/master/helm-charts/django-app
+
+### 2. Demonstrate usage of Prometheus.
 NA
+
