@@ -12,6 +12,45 @@ Opening the application (GET /) in each should print out either “running in lo
 
 ## 2. Include Mysql, Redis and Memcached in the cluster and demonstrate their usage inside Django app (e.g. for session storage or publishing an event, nothing too complicated).
 
+1. Setup the enviroment
+
+- docker-compose.yml file is created with different docker images to be used.
+ + the dev service with our `django-dev:develop` image which is built from the build-dev.sh file.
+    We use this file to build the development environment for django app (with the Dockerfile-dev file)
+  + Other services (db, memcached, redis) is added with standard docker images. We can use the service
+    names as hostname to connect to these services.
+
+- `Pipfile` is used to install python package dependencies to be used for the django app (https://github.com/pypa/pipfile)
+
+- We use environment variables for configurating the app, .env and .env-dev is used to create env vars
+  for `dev` and `db` services in the docker-compose.yml file (https://docs.docker.com/compose/environment-variables/#the-env_file-configuration-option)
+
+- `app` directory is the django app entry point; `home` and `polls` are all standard Django applications.
+
+- we use run-dev.sh bash script to run the dev service
+
+- we use run-migration.sh bash script to run any migration for the django app
+
+2. Run the app
+
+To run the app, we need to run the following commands:
+
+  ```
+  $ sh build-dev.sh
+  $ docker-compose up -d dev
+  $ docker-compose logs -f dev # for logging
+  $ docker-compose exec dev pipenv run python manage.py createsuperuser
+  $ docker-compose exec dev pipenv run sh run-migration.sh
+  ```
+
+3. Run command within the dev container
+
+  ```
+  $ docker-compose exec dev sh
+  ...
+  $ docker-compose exec dev pipenv run <cmd>
+  ```
+
 - mysql, redis and memcahed are installed via helm chart dependencies (see https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/requirements.yaml)
 
 - to access these services, we use env variables:
