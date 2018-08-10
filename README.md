@@ -10,8 +10,7 @@ Opening the application (GET /) in each should print out either “running in lo
   otherwise, "running in production" when (GET /) is accessed.
 
 
-## 2. Include Mysql, Redis and Memcached in the cluster and demonstrate their usage inside
-Django app (e.g. for session storage or publishing an event, nothing too complicated).
+## 2. Include Mysql, Redis and Memcached in the cluster and demonstrate their usage inside Django app (e.g. for session storage or publishing an event, nothing too complicated).
 
 - mysql, redis and memcahed are installed via helm chart dependencies (see https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/requirements.yaml)
 
@@ -41,17 +40,14 @@ Django app (e.g. for session storage or publishing an event, nothing too complic
 
 
 
-## 3. The application should auto scale​ based on cpu usage. Both the web server (e.g.
-Nginx) and the chosen wsgi should scale independently.
+## 3. The application should auto scale​ based on cpu usage. Both the web server (e.g.Nginx) and the chosen wsgi should scale independently.
 
 autoscaler is added with the scaler.yaml file for the wsgi app deployment (helm-charts/django-app/templates/scaler.yaml)
 
 For the nginx (from nginx ingress), we can use the smilar configuration for the deployment.
 
 
-## 4. Application needs to include a secret key​ to communicate with a hypothetical external
-service (e.g. Stripe). Please demonstrate storing this secret inside the cluster and then
-using it from inside the Django app.
+## 4. Application needs to include a secret key​ to communicate with a hypothetical external service (e.g. Stripe). Please demonstrate storing this secret inside the cluster and then using it from inside the Django app.
 
 I use https://github.com/dj-stripe/dj-stripe django app and configure it with environment variables.
 
@@ -61,16 +57,9 @@ k8s secrets are used to store the secrets:
 - https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/deployment.yaml#L45
 
 
-and from the app, open GET /stripe_test to check if dj-stripe installed
 
-
-
-## 5. Create Jenkins configuration to build and upload images to a chosen registry, as well as
-deploy the application to Kubernetes (master branch only).
+## 5. Create Jenkins configuration to build and upload images to a chosen registry, as well as deploy the application to Kubernetes (master branch only).
 NA
 
-## 6. Store the code in a Github repository.
-Bonus points
-1. Demonstrate usage of Helm Charts.
-2. Demonstrate usage of Prometheus.
+## 6. Store the code in a Github repository. Bonus points 1. Demonstrate usage of Helm Charts. 2. Demonstrate usage of Prometheus.
 NA
