@@ -16,17 +16,17 @@ Opening the application (GET /) in each should print out either “running in lo
 ## 2. Include Mysql, Redis and Memcached in the cluster and demonstrate their usage inside Django app (e.g. for session storage or publishing an event, nothing too complicated).
 
 
-- mysql, redis and memcahed are installed via helm chart dependencies (see https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/requirements.yaml)
+- mysql, redis and memcahed are installed via helm chart dependencies (see https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/requirements.yaml)
 
 - to access these services, we use env variables:
-  + https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/deployment.yaml#L36
-  + configmap is created by https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/configmap.yaml
-  + secrets is created by https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/secrets.yaml
+  + https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/templates/deployment.yaml#L36
+  + configmap is created by https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/templates/configmap.yaml
+  + secrets is created by https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/templates/secrets.yaml
   + default helm chart value is from the values.yaml file
   + you can override the values.yaml for customization with override.tpl.yaml file which is a template file
     to generate override.yaml file from environment variable from the host machine.
 
-- Open GET /mysql to see if the database is connected https://github.com/Octopus9589/OctopusLabs/blob/master/home/views.py#L28
+- Open GET /mysql to see if the database is connected https://github.com/Octopus9589/OctopusLabs-Django/blob/master/home/views.py#L28
   
 
 1. Setup the enviroment
@@ -81,9 +81,9 @@ For the nginx (from nginx ingress), we can use the smilar configuration for the 
 I attempted to use https://github.com/dj-stripe/dj-stripe django app and configure it with environment variables.
 
 k8s secrets are used to store the secrets:
-- https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/values.yaml#L32
-- https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/secrets.yaml#L12
-- https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/templates/deployment.yaml#L45
+- https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/values.yaml#L32
+- https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/templates/secrets.yaml#L12
+- https://github.com/Octopus9589/OctopusLabs-Django/blob/master/helm-charts/django-app/templates/deployment.yaml#L45
 
 
 
@@ -91,12 +91,11 @@ k8s secrets are used to store the secrets:
 NA
 
 ## 6. Store the code in a Github repository. 
-https://github.com/Octopus9589/OctopusLabs-Django/
+https://github.com/Octopus9589/OctopusLabs-Django-Django/
 
 ### Bonus points 
 ### 1. Demonstrate usage of Helm Charts. 
-https://github.com/Octopus9589/OctopusLabs-Django/tree/master/helm-charts/django-app
+https://github.com/Octopus9589/OctopusLabs-Django-Django/tree/master/helm-charts/django-app
 
 ### 2. Demonstrate usage of Prometheus.
 NA
-
