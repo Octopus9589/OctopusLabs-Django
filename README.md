@@ -1,4 +1,4 @@
-FYI I have zero experience with all of the technologies mentioned in the technical challenge as I am from a Windows background. Nevertheless, I have tried to learn as much as I can to attempt this challenge. 
+FYI I have little experience with the technologies mentioned in the technical challenge as I am from a Windows background. Nevertheless, I have tried to learn as much as I can to attempt this challenge. 
 
 
 # Requirements - OctopusLabs technical challenge
@@ -91,11 +91,11 @@ k8s secrets are used to store the secrets:
 NA
 
 ## 6. Store the code in a Github repository. 
-https://github.com/Octopus9589/OctopusLabs-Django-Django/
+https://github.com/Octopus9589/OctopusLabs-Django/
 
 ### Bonus points 
 ### 1. Demonstrate usage of Helm Charts. 
-https://github.com/Octopus9589/OctopusLabs-Django-Django/tree/master/helm-charts/django-app
+https://github.com/Octopus9589/OctopusLabs-Django/tree/master/helm-charts/django-app
 
 ### 2. Demonstrate usage of Prometheus.
 NA
