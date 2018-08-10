@@ -71,7 +71,7 @@ To run the app, we need to run the following commands:
 
 ## 3. The application should auto scale​ based on cpu usage. Both the web server (e.g.Nginx) and the chosen wsgi should scale independently.
 
-autoscaler is added with the scaler.yaml file for the wsgi app deployment (helm-charts/django-app/templates/scaler.yaml)
+autoscaler is added with the scaler.yaml file for the wsgi app deployment (helm-charts/django-app/templates/scaler.yaml). I think this should work.
 
 For the nginx (from nginx ingress), we can use the smilar configuration for the deployment.
 
