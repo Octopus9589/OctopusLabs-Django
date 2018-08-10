@@ -1,0 +1,68 @@
+# Default values for django-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: ${HELM_REPLICA_COUNT}
+image:
+  repository: ${HELM_IMAGE_REPOSITORY}
+  tag: ${HELM_IMAGE_TAG}
+  pullPolicy: ${HELM_IMAGE_PULL_POLICY}
+service:
+  name: nginx
+  type: ClusterIP
+  externalPort: ${HELM_PORT}
+  internalPort: ${HELM_PORT}
+ingress:
+  enabled: ${HELM_INGRESS_ENABLED}
+  # Used to create Ingress record (should used with service.type: ClusterIP).
+  hosts:
+    - ${HELM_INGRESS_HOST}
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+
+configMap:
+  DJANGO_SETTINGS_MODULE: ${HELM_DJANGO_SETTINGS_MODULE}
+  ALLOWED_HOSTS: ${HELM_ALLOWED_HOSTS}
+
+secret:
+  STRIPE_LIVE_PUBLIC_KEY: ${HELM_STRIPE_LIVE_PUBLIC_KEY}
+  STRIPE_LIVE_SECRET_KEY: ${HELM_STRIPE_LIVE_SECRET_KEY}
+  STRIPE_TEST_PUBLIC_KEY: ${HELM_STRIPE_TEST_PUBLIC_KEY}
+  STRIPE_TEST_SECRET_KEY: ${HELM_STRIPE_TEST_SECRET_KEY}
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+#https://github.com/helm/charts/tree/master/stable/mysql
+mysql:
+  mysqlPort: ${HELM_DB_PORT}
+  mysqlRootPassword: ${HELM_DB_ROOT_PASSWORD}
+  mysqlUser: ${HELM_DB_USER}
+  mysqlPassword: ${HELM_DB_PASSWORD}
+  mysqlDatabase: ${HELM_DB_NAME}
+
+#https://github.com/helm/charts/tree/master/stable/memcached
+memcached:
+  imagePullPolicy: IfNotPresent
+  enabled: ${HELM_MEMCACHED_ENABLED}
+  port: ${HELM_MEMCACHED_PORT}
+
+#https://github.com/helm/charts/tree/master/stable/redis
+redis:
+  enabled: ${HELM_REDIS_ENABLED}
+  master:
+    port: ${HELM_REDIS_PORT}
+
+  usePassword: true
+  password: django_redis_password
+  existingSecret: ${HELM_REALEASE_NAME}-redis-secret

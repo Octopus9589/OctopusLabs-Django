@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+  dev:
+    # make sure to run .build-dev.sh first
+    image: django-dev:develop
+    working_dir: /opt/app
+    command: sh wait-db.sh
+    env_file:
+      - .env
+      - .env-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/opt/app
+    depends_on:
+      - db
+    links:
+      - db
+      - memcached
+      - redis
+    restart: unless-stopped
+
+  db:
+    image: mysql:5.7
+    env_file:
+      - .env
+      - .env-dev
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+    restart: unless-stopped
+
+  memcached:
+    image: memcached:1.5.9
+    restart: unless-stopped
+
+  redis:
+    image: redis:4.0.11
+    restart: unless-stopped
+
+volumes:
+  data:

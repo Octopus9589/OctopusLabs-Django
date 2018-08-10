@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "fullname" . }}
+    spec:
+      initContainers:
+      - name: wait-for-db
+        image: busybox:1.28.3
+        command: ['sh', '-c', 'until nslookup $DB_HOST; do echo waiting for $DB_HOST; sleep 2; done;']
+        envFrom:
+        - configMapRef:
+            name: {{ template "fullname" . }}-db
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.service.internalPort }}
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: {{ .Values.service.internalPort }}
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: {{ .Values.service.internalPort }}
+
+        envFrom:
+          - configMapRef:
+              name: {{ template "fullname" . }}
+          - configMapRef:
+              name: {{ template "fullname" . }}-db
+          - configMapRef:
+              name: {{ template "fullname" . }}-memcached
+          - configMapRef:
+              name: {{ template "fullname" . }}-redis
+          - secretRef:
+              name: {{ .Release.Name }}
+          - secretRef:
+              name: {{ .Release.Name }}-db-secret
+          - secretRef:
+              name: {{ .Release.Name }}-redis-secret
+        resources:
+{{ toYaml .Values.resources | indent 10 }}

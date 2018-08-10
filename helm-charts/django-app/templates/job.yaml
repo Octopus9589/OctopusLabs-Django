@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-migration
+spec:
+  template:
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-migration
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - #!/bin/bash
+              set -e
+
+              echo "migrate ------>"
+
+              python manage.py migrate
+
+              echo "stripe init ------>"
+
+              python manage.py djstripe_init_customers
+
+              python manage.py djstripe_sync_plans_from_stripe
+          envFrom:
+          - configMapRef:
+              name: {{ template "fullname" . }}
+          - configMapRef:
+              name: {{ template "fullname" . }}-db
+          - configMapRef:
+              name: {{ template "fullname" . }}-memcached
+          - configMapRef:
+              name: {{ template "fullname" . }}-redis
+          - secretRef:
+              name: {{ .Release.Name }}
+          - secretRef:
+              name: {{ .Release.Name }}-db-secret
+          - secretRef:
+              name: {{ .Release.Name }}-redis-secret
+      restartPolicy: Never
+  backoffLimit: 1

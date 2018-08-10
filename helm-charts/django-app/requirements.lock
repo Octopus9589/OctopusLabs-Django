@@ -1,0 +1,24 @@
+dependencies:
+- condition: ""
+  enabled: false
+  import-values: null
+  name: mysql
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 0.8.2
+- condition: ""
+  enabled: false
+  import-values: null
+  name: memcached
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 2.0.0
+- condition: ""
+  enabled: false
+  import-values: null
+  name: redis
+  repository: https://kubernetes-charts.storage.googleapis.com
+  tags: null
+  version: 3.6.5
+digest: sha256:e81bba95d48a59efefba45b04594d4ba1bef215757c1889d5307b5c4c30cdfbc
+generated: 2018-08-09T09:26:33.061816+07:00

@@ -1,0 +1,10 @@
+dependencies:
+  - name: mysql
+    version: 0.8.2
+    repository: https://kubernetes-charts.storage.googleapis.com
+  - name: memcached
+    version: 2.0.0
+    repository: https://kubernetes-charts.storage.googleapis.com
+  - name: redis
+    version: 3.6.5
+    repository: https://kubernetes-charts.storage.googleapis.com

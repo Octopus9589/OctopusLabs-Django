@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+{{- range $key, $val := .Values.configMap }}
+  {{ $key }}: {{ default "" $val | quote }}
+{{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}-db
+  labels:
+    app: {{ template "name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  DB_NAME: {{ $.Values.mysql.mysqlDatabase | quote }}
+  DB_HOST: {{ include "databaseHost" . | quote }}
+  DB_PORT: {{ $.Values.mysql.mysqlPort | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}-redis
+  labels:
+    app: {{ template "name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  REDIS_ENABLED: {{ template "isEnabled" $.Values.redis.enabled }}
+  REDIS_PORT: {{ $.Values.redis.master.port | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}-memcached
+  labels:
+    app: {{ template "name" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  MEMCACHED_ENABLED: {{ template "isEnabled" $.Values.memcached.enabled }}
+  MEMCACHED_PORT: {{ $.Values.memcached.port | quote }}
+  MEMCACHED_HOST: {{ .Release.Name }}-memcached
