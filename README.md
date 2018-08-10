@@ -1,4 +1,4 @@
-# Requirements - OctopusLabs 
+# Requirements - OctopusLabs technical challenge
 
 ## 1. Support two environments: local​ (for docker-compose) and production​ (for kubernetes).
 Opening the application (GET /) in each should print out either “running in local” or
