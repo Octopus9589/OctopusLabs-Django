@@ -1,3 +1,6 @@
+FYI I have zero experience with all of the technologies mentioned in the technical challenge as I am from a Windows background. I have tried to learn as much as I can to attempt this challenge. 
+
+
 # Requirements - OctopusLabs technical challenge
 
 ## 1. Support two environments: local​ (for docker-compose) and production​ (for kubernetes).
@@ -88,7 +91,7 @@ For the nginx (from nginx ingress), we can use the smilar configuration for the 
 
 ## 4. Application needs to include a secret key​ to communicate with a hypothetical external service (e.g. Stripe). Please demonstrate storing this secret inside the cluster and then using it from inside the Django app.
 
-I use https://github.com/dj-stripe/dj-stripe django app and configure it with environment variables.
+I attempted to use https://github.com/dj-stripe/dj-stripe django app and configure it with environment variables.
 
 k8s secrets are used to store the secrets:
 - https://github.com/Octopus9589/OctopusLabs/blob/master/helm-charts/django-app/values.yaml#L32
